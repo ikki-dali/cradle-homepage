@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#1a1a1a"/>
+  <text x="50%" y="200" text-anchor="middle" font-family="Century Gothic, Futura, Helvetica Neue, Arial, sans-serif" font-size="280" fill="#ffffff" letter-spacing="-10">C</text>
+  <path d="M 120 280 Q 256 420 392 280 Q 256 360 120 280 Z" fill="#ffffff"/>
+</svg>
+
