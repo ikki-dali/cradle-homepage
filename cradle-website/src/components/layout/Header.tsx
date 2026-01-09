@@ -130,8 +130,8 @@ export function Header() {
                     color: "var(--theme-cta-text, #ffffff)"
                   }}
                 >
-                  お問い合わせ
-                </TransitionLink>
+                    お問い合わせ
+                  </TransitionLink>
               </motion.div>
             </nav>
           </motion.div>

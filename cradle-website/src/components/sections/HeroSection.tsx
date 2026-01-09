@@ -4,6 +4,22 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
+// パーティクルの設定
+const particles = [
+  { id: 1, size: 4, x: "10%", y: "20%", duration: 15, delay: 0 },
+  { id: 2, size: 6, x: "20%", y: "60%", duration: 18, delay: 2 },
+  { id: 3, size: 3, x: "30%", y: "30%", duration: 12, delay: 1 },
+  { id: 4, size: 5, x: "70%", y: "25%", duration: 20, delay: 3 },
+  { id: 5, size: 4, x: "80%", y: "70%", duration: 16, delay: 0.5 },
+  { id: 6, size: 7, x: "85%", y: "40%", duration: 14, delay: 2.5 },
+  { id: 7, size: 3, x: "15%", y: "80%", duration: 17, delay: 1.5 },
+  { id: 8, size: 5, x: "50%", y: "15%", duration: 19, delay: 4 },
+  { id: 9, size: 4, x: "60%", y: "75%", duration: 13, delay: 0.8 },
+  { id: 10, size: 6, x: "40%", y: "50%", duration: 21, delay: 3.5 },
+  { id: 11, size: 3, x: "25%", y: "45%", duration: 16, delay: 2.2 },
+  { id: 12, size: 5, x: "75%", y: "55%", duration: 18, delay: 1.8 },
+];
+
 export function HeroSection() {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
@@ -46,6 +62,35 @@ export function HeroSection() {
         />
       </div>
 
+      {/* Floating Particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {particles.map((particle) => (
+          <motion.div
+            key={particle.id}
+            className="absolute rounded-full"
+            style={{
+              width: particle.size,
+              height: particle.size,
+              left: particle.x,
+              top: particle.y,
+              background: "var(--theme-primary, #1a1a1a)",
+              opacity: 0.15,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              x: [0, 10, -10, 0],
+              opacity: [0.15, 0.3, 0.15],
+            }}
+            transition={{
+              duration: particle.duration,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: particle.delay,
+            }}
+          />
+        ))}
+      </div>
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
         <div className="max-w-4xl mx-auto text-center">
           {/* Main Catchcopy */}
@@ -63,12 +108,12 @@ export function HeroSection() {
             >
               本気で伴走するAI導入<span className="whitespace-nowrap">パートナー。</span>
               <motion.svg
-                className="absolute -bottom-2 left-0 w-full h-3 opacity-30"
+                className="absolute -bottom-2 left-0 w-full h-3"
                 viewBox="0 0 300 12"
                 preserveAspectRatio="none"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 0.3 }}
-                transition={{ duration: 1.5, delay: 0.8 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0.8 }}
               >
                 <motion.path
                   d="M0 6 Q 75 12 150 6 Q 225 0 300 6"
@@ -76,6 +121,14 @@ export function HeroSection() {
                   stroke="var(--theme-primary, currentColor)"
                   strokeWidth="4"
                   strokeLinecap="round"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ 
+                    duration: 2.0, 
+                    delay: 1.0,
+                    ease: "easeInOut"
+                  }}
+                  style={{ opacity: 0.3 }}
                 />
               </motion.svg>
             </span>
@@ -127,6 +180,39 @@ export function HeroSection() {
           </motion.div>
         </div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 1.5 }}
+      >
+        <motion.span 
+          className="text-xs tracking-widest uppercase"
+          style={{ color: "var(--theme-accent, #666666)" }}
+        >
+          Scroll
+        </motion.span>
+        <motion.div
+          className="w-6 h-10 rounded-full border-2 flex items-start justify-center p-1"
+          style={{ borderColor: "var(--theme-accent, #666666)" }}
+        >
+          <motion.div
+            className="w-1.5 h-2.5 rounded-full"
+            style={{ background: "var(--theme-primary, #1a1a1a)" }}
+            animate={{
+              y: [0, 12, 0],
+              opacity: [1, 0.3, 1],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        </motion.div>
+      </motion.div>
 
       {/* Decorative curved line at bottom */}
       <div className="absolute bottom-0 left-0 right-0">
