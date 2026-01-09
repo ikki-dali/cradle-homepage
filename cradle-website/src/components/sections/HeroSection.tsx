@@ -2,23 +2,6 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-
-// パーティクルの設定
-const particles = [
-  { id: 1, size: 4, x: "10%", y: "20%", duration: 15, delay: 0 },
-  { id: 2, size: 6, x: "20%", y: "60%", duration: 18, delay: 2 },
-  { id: 3, size: 3, x: "30%", y: "30%", duration: 12, delay: 1 },
-  { id: 4, size: 5, x: "70%", y: "25%", duration: 20, delay: 3 },
-  { id: 5, size: 4, x: "80%", y: "70%", duration: 16, delay: 0.5 },
-  { id: 6, size: 7, x: "85%", y: "40%", duration: 14, delay: 2.5 },
-  { id: 7, size: 3, x: "15%", y: "80%", duration: 17, delay: 1.5 },
-  { id: 8, size: 5, x: "50%", y: "15%", duration: 19, delay: 4 },
-  { id: 9, size: 4, x: "60%", y: "75%", duration: 13, delay: 0.8 },
-  { id: 10, size: 6, x: "40%", y: "50%", duration: 21, delay: 3.5 },
-  { id: 11, size: 3, x: "25%", y: "45%", duration: 16, delay: 2.2 },
-  { id: 12, size: 5, x: "75%", y: "55%", duration: 18, delay: 1.8 },
-];
 
 export function HeroSection() {
   return (
@@ -29,66 +12,79 @@ export function HeroSection() {
         style={{ background: "var(--theme-hero-bg, linear-gradient(180deg, #ffffff 0%, #fafafa 100%))" }}
       />
       
-      {/* Decorative floating shapes */}
+      {/* Animated Gradient Blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Large blob - top right */}
         <motion.div
-          className="absolute -top-20 -right-20 w-96 h-96 rounded-full opacity-30 blur-3xl"
+          className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full opacity-25 blur-[100px]"
           style={{ background: "var(--theme-primary, #1a1a1a)" }}
           animate={{
-            x: [0, 30, 0],
-            y: [0, -20, 0],
-            scale: [1, 1.1, 1],
+            x: [0, 80, -40, 60, 0],
+            y: [0, -60, 40, -30, 0],
+            scale: [1, 1.2, 0.9, 1.1, 1],
           }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
         />
+        
+        {/* Large blob - bottom left */}
         <motion.div
-          className="absolute -bottom-32 -left-32 w-[500px] h-[500px] rounded-full opacity-20 blur-3xl"
+          className="absolute -bottom-48 -left-48 w-[700px] h-[700px] rounded-full opacity-20 blur-[120px]"
           style={{ background: "var(--theme-accent, #666666)" }}
           animate={{
-            x: [0, -20, 0],
-            y: [0, 30, 0],
-            scale: [1, 1.15, 1],
+            x: [0, -60, 80, -40, 0],
+            y: [0, 80, -40, 60, 0],
+            scale: [1, 1.15, 1.05, 1.2, 1],
           }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
+        
+        {/* Medium blob - center left */}
         <motion.div
-          className="absolute top-1/3 left-1/4 w-64 h-64 rounded-full opacity-15 blur-2xl"
+          className="absolute top-1/4 -left-20 w-[400px] h-[400px] rounded-full opacity-15 blur-[80px]"
+          style={{ background: "var(--theme-primary, #1a1a1a)" }}
+          animate={{
+            x: [0, 100, 50, 120, 0],
+            y: [0, -80, 60, -40, 0],
+            scale: [1, 0.8, 1.1, 0.9, 1],
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
+        
+        {/* Medium blob - center right */}
+        <motion.div
+          className="absolute top-1/3 -right-10 w-[350px] h-[350px] rounded-full opacity-20 blur-[90px]"
           style={{ background: "var(--theme-accent-light, #999999)" }}
           animate={{
-            x: [0, 40, 0],
-            y: [0, -40, 0],
+            x: [0, -80, 40, -60, 0],
+            y: [0, 60, -80, 40, 0],
+            scale: [1, 1.2, 0.85, 1.1, 1],
           }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 3 }}
         />
-      </div>
-
-      {/* Floating Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {particles.map((particle) => (
-          <motion.div
-            key={particle.id}
-            className="absolute rounded-full"
-            style={{
-              width: particle.size,
-              height: particle.size,
-              left: particle.x,
-              top: particle.y,
-              background: "var(--theme-primary, #1a1a1a)",
-              opacity: 0.15,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              x: [0, 10, -10, 0],
-              opacity: [0.15, 0.3, 0.15],
-            }}
-            transition={{
-              duration: particle.duration,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: particle.delay,
-            }}
-          />
-        ))}
+        
+        {/* Small blob - top center */}
+        <motion.div
+          className="absolute top-20 left-1/3 w-[300px] h-[300px] rounded-full opacity-10 blur-[70px]"
+          style={{ background: "var(--theme-primary, #1a1a1a)" }}
+          animate={{
+            x: [0, 60, -40, 80, 0],
+            y: [0, 40, -60, 30, 0],
+            scale: [1, 1.3, 0.9, 1.15, 1],
+          }}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+        />
+        
+        {/* Small blob - bottom center */}
+        <motion.div
+          className="absolute bottom-1/4 right-1/3 w-[250px] h-[250px] rounded-full opacity-15 blur-[60px]"
+          style={{ background: "var(--theme-accent, #666666)" }}
+          animate={{
+            x: [0, -50, 70, -30, 0],
+            y: [0, -70, 50, -40, 0],
+            scale: [1, 0.9, 1.2, 1.05, 1],
+          }}
+          transition={{ duration: 19, repeat: Infinity, ease: "easeInOut", delay: 5 }}
+        />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
