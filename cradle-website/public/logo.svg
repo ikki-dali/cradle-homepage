@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- フォント設定: 太さを抑え、幾何学的な形状を優先 -->
+  <style>
+    .text {
+      font-family: "Century Gothic", "Futura", "Helvetica Neue", "Arial", sans-serif;
+      font-weight: normal; /* 太字を解除 */
+      font-size: 200px;
+      fill: #000000;
+    }
+  </style>
+  
+  <!-- テキスト: 中央配置 -->
+  <text x="50%" y="280" text-anchor="middle" class="text" letter-spacing="-5">Cradle</text>
+  
+  <!-- スマイル（曲線） -->
+  <!-- 
+    修正方針:
+    1. 長すぎる -> 幅を縮小 (120/680 -> 170/630)
+    2. 浅すぎる -> 深さを確保 (制御点Yを深く設定)
+    3. 形状 -> 両端から中央にかけて太くなる三日月型
+  -->
+  <path d="M 170 320 Q 400 460 630 320 Q 400 400 170 320 Z" fill="#000000"/>
+</svg>
