@@ -57,10 +57,14 @@ export function FadeInSection({
   };
 
   // トランジション設定
+  const easeValue = hasNavigated
+    ? ("easeOut" as const)
+    : ([0.25, 0.1, 0.25, 1] as [number, number, number, number]);
+
   const transitionConfig = {
     duration: hasNavigated ? 0.5 : duration,
     delay,
-    ease: hasNavigated ? "easeOut" : [0.25, 0.1, 0.25, 1],
+    ease: easeValue,
   };
 
   // 常に同じJSX構造を返す（Hydration Error対策）
