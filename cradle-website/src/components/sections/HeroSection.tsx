@@ -156,6 +156,12 @@ export function HeroSection() {
                 style={{ background: "var(--theme-primary, #1a1a1a)" }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
+                // #region agent log
+                onTouchStart={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HeroSection.tsx:159',message:'Contact button touchStart',data:{event:'touchStart',button:'contact'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{})}
+                onTouchEnd={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HeroSection.tsx:160',message:'Contact button touchEnd',data:{event:'touchEnd',button:'contact'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{})}
+                onHoverStart={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HeroSection.tsx:161',message:'Contact button hoverStart',data:{event:'hoverStart',button:'contact'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{})}
+                onHoverEnd={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HeroSection.tsx:162',message:'Contact button hoverEnd',data:{event:'hoverEnd',button:'contact'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{})}
+                // #endregion
               >
                 お問い合わせ
               </motion.button>
@@ -169,6 +175,12 @@ export function HeroSection() {
                 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
+                // #region agent log
+                onTouchStart={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HeroSection.tsx:180',message:'Services button touchStart',data:{event:'touchStart',button:'services'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{})}
+                onTouchEnd={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HeroSection.tsx:181',message:'Services button touchEnd',data:{event:'touchEnd',button:'services'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{})}
+                onHoverStart={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HeroSection.tsx:182',message:'Services button hoverStart',data:{event:'hoverStart',button:'services'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{})}
+                onHoverEnd={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HeroSection.tsx:183',message:'Services button hoverEnd',data:{event:'hoverEnd',button:'services'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{})}
+                // #endregion
               >
                 サービスを見る
               </motion.button>

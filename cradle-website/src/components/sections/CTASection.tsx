@@ -87,6 +87,12 @@ export function CTASection() {
                     color: "var(--theme-primary, #1a1a1a)"
                   }}
                   whileTap={{ scale: 0.98 }}
+                  // #region agent log
+                  onTouchStart={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'CTASection.tsx:77',message:'CTA button touchStart',data:{event:'touchStart'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{})}
+                  onTouchEnd={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'CTASection.tsx:78',message:'CTA button touchEnd',data:{event:'touchEnd'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{})}
+                  onHoverStart={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'CTASection.tsx:79',message:'CTA button hoverStart',data:{event:'hoverStart'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{})}
+                  onHoverEnd={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'CTASection.tsx:80',message:'CTA button hoverEnd',data:{event:'hoverEnd'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{})}
+                  // #endregion
                 >
                   お問い合わせ
                 </motion.button>
