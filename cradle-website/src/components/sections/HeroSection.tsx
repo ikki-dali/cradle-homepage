@@ -2,8 +2,14 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useSplash } from "@/components/splash/SplashContext";
 
 export function HeroSection() {
+  const { isSplashVisible } = useSplash();
+
+  // スプラッシュが表示中はアニメーションを待機させる
+  // スプラッシュが消えてからアニメーション開始
+  const shouldAnimate = !isSplashVisible;
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       {/* Background with theme support */}
@@ -12,11 +18,11 @@ export function HeroSection() {
         style={{ background: "var(--theme-hero-bg, linear-gradient(180deg, #ffffff 0%, #fafafa 100%))" }}
       />
       
-      {/* Animated Gradient Blobs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Animated Gradient Blobs - hidden on mobile for performance */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
         {/* Large blob - top right */}
         <motion.div
-          className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full opacity-25 blur-[100px]"
+          className="blob-animated absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full opacity-25 blur-[100px]"
           style={{ background: "var(--theme-primary, #1a1a1a)" }}
           animate={{
             x: [0, 80, -40, 60, 0],
@@ -25,10 +31,10 @@ export function HeroSection() {
           }}
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
         />
-        
+
         {/* Large blob - bottom left */}
         <motion.div
-          className="absolute -bottom-48 -left-48 w-[700px] h-[700px] rounded-full opacity-20 blur-[120px]"
+          className="blob-animated absolute -bottom-48 -left-48 w-[700px] h-[700px] rounded-full opacity-20 blur-[120px]"
           style={{ background: "var(--theme-accent, #666666)" }}
           animate={{
             x: [0, -60, 80, -40, 0],
@@ -37,10 +43,10 @@ export function HeroSection() {
           }}
           transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
-        
+
         {/* Medium blob - center left */}
         <motion.div
-          className="absolute top-1/4 -left-20 w-[400px] h-[400px] rounded-full opacity-15 blur-[80px]"
+          className="blob-animated absolute top-1/4 -left-20 w-[400px] h-[400px] rounded-full opacity-15 blur-[80px]"
           style={{ background: "var(--theme-primary, #1a1a1a)" }}
           animate={{
             x: [0, 100, 50, 120, 0],
@@ -49,10 +55,10 @@ export function HeroSection() {
           }}
           transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
-        
+
         {/* Medium blob - center right */}
         <motion.div
-          className="absolute top-1/3 -right-10 w-[350px] h-[350px] rounded-full opacity-20 blur-[90px]"
+          className="blob-animated absolute top-1/3 -right-10 w-[350px] h-[350px] rounded-full opacity-20 blur-[90px]"
           style={{ background: "var(--theme-accent-light, #999999)" }}
           animate={{
             x: [0, -80, 40, -60, 0],
@@ -61,10 +67,10 @@ export function HeroSection() {
           }}
           transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 3 }}
         />
-        
+
         {/* Small blob - top center */}
         <motion.div
-          className="absolute top-20 left-1/3 w-[300px] h-[300px] rounded-full opacity-10 blur-[70px]"
+          className="blob-animated absolute top-20 left-1/3 w-[300px] h-[300px] rounded-full opacity-10 blur-[70px]"
           style={{ background: "var(--theme-primary, #1a1a1a)" }}
           animate={{
             x: [0, 60, -40, 80, 0],
@@ -73,10 +79,10 @@ export function HeroSection() {
           }}
           transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 4 }}
         />
-        
+
         {/* Small blob - bottom center */}
         <motion.div
-          className="absolute bottom-1/4 right-1/3 w-[250px] h-[250px] rounded-full opacity-15 blur-[60px]"
+          className="blob-animated absolute bottom-1/4 right-1/3 w-[250px] h-[250px] rounded-full opacity-15 blur-[60px]"
           style={{ background: "var(--theme-accent, #666666)" }}
           animate={{
             x: [0, -50, 70, -30, 0],
@@ -98,18 +104,19 @@ export function HeroSection() {
           >
             構想から定着まで。
             <br />
-            <span 
+            <span
               className="relative inline-block"
               style={{ color: "var(--theme-primary, inherit)" }}
             >
               本気で伴走するAI導入<span className="whitespace-nowrap">パートナー。</span>
+              {/* 下線アニメーションだけスプラッシュ後に開始 */}
               <motion.svg
                 className="absolute -bottom-2 left-0 w-full h-3"
                 viewBox="0 0 300 12"
                 preserveAspectRatio="none"
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3, delay: 0.8 }}
+                animate={shouldAnimate ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.3, delay: 0.3 }}
               >
                 <motion.path
                   d="M0 6 Q 75 12 150 6 Q 225 0 300 6"
@@ -118,10 +125,10 @@ export function HeroSection() {
                   strokeWidth="4"
                   strokeLinecap="round"
                   initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ 
-                    duration: 2.0, 
-                    delay: 1.0,
+                  animate={shouldAnimate ? { pathLength: 1 } : { pathLength: 0 }}
+                  transition={{
+                    duration: 1.2,
+                    delay: 0.3,
                     ease: "easeInOut"
                   }}
                   style={{ opacity: 0.3 }}
@@ -156,12 +163,6 @@ export function HeroSection() {
                 style={{ background: "var(--theme-primary, #1a1a1a)" }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
-                // #region agent log
-                onTouchStart={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HeroSection.tsx:159',message:'Contact button touchStart',data:{event:'touchStart',button:'contact'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{})}
-                onTouchEnd={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HeroSection.tsx:160',message:'Contact button touchEnd',data:{event:'touchEnd',button:'contact'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{})}
-                onHoverStart={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HeroSection.tsx:161',message:'Contact button hoverStart',data:{event:'hoverStart',button:'contact'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{})}
-                onHoverEnd={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HeroSection.tsx:162',message:'Contact button hoverEnd',data:{event:'hoverEnd',button:'contact'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{})}
-                // #endregion
               >
                 お問い合わせ
               </motion.button>
@@ -169,18 +170,12 @@ export function HeroSection() {
             <Link href="/services">
               <motion.button
                 className="px-8 py-4 rounded-full font-medium transition-all border-2"
-                style={{ 
+                style={{
                   borderColor: "var(--theme-primary, #1a1a1a)",
                   color: "var(--theme-primary, #1a1a1a)"
                 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
-                // #region agent log
-                onTouchStart={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HeroSection.tsx:180',message:'Services button touchStart',data:{event:'touchStart',button:'services'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{})}
-                onTouchEnd={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HeroSection.tsx:181',message:'Services button touchEnd',data:{event:'touchEnd',button:'services'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{})}
-                onHoverStart={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HeroSection.tsx:182',message:'Services button hoverStart',data:{event:'hoverStart',button:'services'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{})}
-                onHoverEnd={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'HeroSection.tsx:183',message:'Services button hoverEnd',data:{event:'hoverEnd',button:'services'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{})}
-                // #endregion
               >
                 サービスを見る
               </motion.button>

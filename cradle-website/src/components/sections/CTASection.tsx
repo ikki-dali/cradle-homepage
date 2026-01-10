@@ -10,10 +10,10 @@ export function CTASection() {
       className="py-20 md:py-32 relative overflow-hidden transition-all duration-700"
       style={{ background: "var(--theme-cta-bg, #1a1a1a)" }}
     >
-      {/* Animated background pattern */}
+      {/* Animated background pattern - blobs hidden on mobile */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
-          className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-10 blur-3xl"
+          className="hidden md:block blob-animated absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-10 blur-3xl"
           style={{ background: "var(--theme-cta-text, #ffffff)" }}
           animate={{
             x: [0, 50, 0],
@@ -23,7 +23,7 @@ export function CTASection() {
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-10 blur-3xl"
+          className="hidden md:block blob-animated absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-10 blur-3xl"
           style={{ background: "var(--theme-cta-text, #ffffff)" }}
           animate={{
             x: [0, -40, 0],
@@ -32,9 +32,9 @@ export function CTASection() {
           }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
-        
+
         {/* Subtle grid pattern */}
-        <div 
+        <div
           className="absolute inset-0 opacity-5"
           style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, var(--theme-cta-text, #ffffff) 1px, transparent 0)`,
@@ -76,23 +76,17 @@ export function CTASection() {
               <Link href="/contact">
                 <motion.button
                   className="px-10 py-4 rounded-full font-medium transition-all border-2"
-                  style={{ 
+                  style={{
                     borderColor: "var(--theme-cta-text, #ffffff)",
                     color: "var(--theme-cta-text, #ffffff)",
                     background: "transparent"
                   }}
-                  whileHover={{ 
+                  whileHover={{
                     scale: 1.05,
                     background: "var(--theme-cta-text, #ffffff)",
                     color: "var(--theme-primary, #1a1a1a)"
                   }}
                   whileTap={{ scale: 0.98 }}
-                  // #region agent log
-                  onTouchStart={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'CTASection.tsx:77',message:'CTA button touchStart',data:{event:'touchStart'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{})}
-                  onTouchEnd={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'CTASection.tsx:78',message:'CTA button touchEnd',data:{event:'touchEnd'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{})}
-                  onHoverStart={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'CTASection.tsx:79',message:'CTA button hoverStart',data:{event:'hoverStart'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{})}
-                  onHoverEnd={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'CTASection.tsx:80',message:'CTA button hoverEnd',data:{event:'hoverEnd'},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{})}
-                  // #endregion
                 >
                   お問い合わせ
                 </motion.button>

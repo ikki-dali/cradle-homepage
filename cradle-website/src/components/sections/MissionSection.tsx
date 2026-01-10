@@ -10,10 +10,10 @@ export function MissionSection() {
       className="py-20 md:py-32 relative overflow-hidden transition-all duration-500"
       style={{ background: "var(--theme-section-alt-bg, #f5f5f5)" }}
     >
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {/* Decorative background elements - hidden on mobile */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden hidden md:block">
         <motion.div
-          className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full opacity-10 blur-3xl"
+          className="blob-animated absolute top-0 right-0 w-[600px] h-[600px] rounded-full opacity-10 blur-3xl"
           style={{ background: "var(--theme-primary, #1a1a1a)" }}
           animate={{
             x: [0, -30, 0],
@@ -22,7 +22,7 @@ export function MissionSection() {
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-10 blur-3xl"
+          className="blob-animated absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-10 blur-3xl"
           style={{ background: "var(--theme-accent, #666666)" }}
           animate={{
             x: [0, 20, 0],

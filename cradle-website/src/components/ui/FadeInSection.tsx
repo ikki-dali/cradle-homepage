@@ -23,7 +23,10 @@ export function FadeInSection({
   animateOnMount = false,
 }: FadeInSectionProps) {
   const { hasNavigated } = useTransition();
-  
+  const ref = useRef<HTMLDivElement>(null);
+  // amount を 0.3 に増やして、要素の30%が見えてからアニメーション開始
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
+
   // 移動距離を大きくして「出てくる」感を強調
   const directionOffset = {
     up: { y: 50, x: 0 },
@@ -33,92 +36,41 @@ export function FadeInSection({
     none: { y: 0, x: 0 },
   };
 
-  const ref = useRef<HTMLDivElement>(null);
-  // amount を 0.3 に増やして、要素の30%が見えてからアニメーション開始
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  // SSR/クライアント初回で同じ値を返すようにする
+  // animateOnMountの場合は即座にアニメーション開始、それ以外はisInViewに依存
+  const shouldAnimate = animateOnMount || isInView;
 
-  // ページ遷移後：位置は動かさず、フェードとディレイだけ
-  if (hasNavigated && animateOnMount) {
-    return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{
-          duration: 0.5,
-          delay,
-          ease: "easeOut",
-        }}
-        className={className}
-      >
-        {children}
-      </motion.div>
-    );
-  }
+  // ページ遷移後は位置移動なし（フェードのみ）
+  const usePositionAnimation = !hasNavigated;
 
-  // 初回アクセス + animateOnMount：下から出てくるアニメーション
-  if (animateOnMount) {
-    return (
-      <motion.div
-        initial={{
-          opacity: 0,
-          ...directionOffset[direction],
-        }}
-        animate={{
-          opacity: 1,
-          y: 0,
-          x: 0,
-        }}
-        transition={{
-          duration,
-          delay,
-          ease: [0.25, 0.1, 0.25, 1],
-        }}
-        className={className}
-      >
-        {children}
-      </motion.div>
-    );
-  }
+  // 初期状態の計算
+  const initialState = {
+    opacity: 0,
+    ...(usePositionAnimation ? directionOffset[direction] : {}),
+  };
 
-  // ページ遷移後のスクロールアニメーション：位置は動かさず、フェードだけ
-  if (hasNavigated) {
-    return (
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{
-          duration: 0.5,
-          ease: "easeOut",
-        }}
-        className={className}
-      >
-        {children}
-      </motion.div>
-    );
-  }
+  // アニメーション後の状態
+  const animatedState = {
+    opacity: 1,
+    y: 0,
+    x: 0,
+  };
 
-  // 初回アクセス + スクロールアニメーション
+  // トランジション設定
+  const transitionConfig = {
+    duration: hasNavigated ? 0.5 : duration,
+    delay,
+    ease: hasNavigated ? "easeOut" : [0.25, 0.1, 0.25, 1],
+  };
+
+  // 常に同じJSX構造を返す（Hydration Error対策）
+  // 条件分岐はprops内で行い、DOM構造は変えない
   return (
     <motion.div
-      ref={ref}
-      initial={{
-        opacity: 0,
-        ...directionOffset[direction],
-      }}
-      animate={isInView ? {
-        opacity: 1,
-        y: 0,
-        x: 0,
-      } : {
-        opacity: 0,
-        ...directionOffset[direction],
-      }}
-      transition={{
-        duration,
-        delay,
-        ease: [0.25, 0.1, 0.25, 1],
-      }}
+      ref={animateOnMount ? undefined : ref}
+      initial={initialState}
+      animate={shouldAnimate ? animatedState : initialState}
+      transition={transitionConfig}
       className={className}
     >
       {children}

@@ -32,10 +32,10 @@ interface ThemeProviderProps {
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setThemeState] = useState<ThemeType>("blue");
 
-  // Set initial theme on mount
+  // Set theme on mount and when theme changes
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-  }, []);
+  }, [theme]);
 
   const setTheme = useCallback((newTheme: ThemeType) => {
     setThemeState(newTheme);

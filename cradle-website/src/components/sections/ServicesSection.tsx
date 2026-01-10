@@ -88,22 +88,16 @@ export function ServicesSection() {
           {services.map((service, index) => (
             <FadeInSection key={service.id} delay={index * 0.1}>
               <Link href={`/services/${service.slug}`}>
-                <motion.div 
+                <motion.div
                   className="group h-full rounded-xl border transition-all duration-300 cursor-pointer overflow-hidden"
-                  style={{ 
+                  style={{
                     borderColor: "var(--theme-card-border, #e5e5e5)",
                     background: "white",
                   }}
-                  whileHover={{ 
+                  whileHover={{
                     y: -4,
                     boxShadow: "0 12px 40px -12px rgba(0,0,0,0.15)",
                   }}
-                  // #region agent log
-                  onTouchStart={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ServicesSection.tsx:91',message:'Service card touchStart',data:{event:'touchStart',serviceId:service.id},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{})}
-                  onTouchEnd={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ServicesSection.tsx:92',message:'Service card touchEnd',data:{event:'touchEnd',serviceId:service.id},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{})}
-                  onHoverStart={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ServicesSection.tsx:93',message:'Service card hoverStart',data:{event:'hoverStart',serviceId:service.id},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{})}
-                  onHoverEnd={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ServicesSection.tsx:94',message:'Service card hoverEnd',data:{event:'hoverEnd',serviceId:service.id},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'B'})}).catch(()=>{})}
-                  // #endregion
                 >
                   {/* Service Image */}
                   <div className="relative h-40 overflow-hidden">
@@ -115,16 +109,13 @@ export function ServicesSection() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                     {/* Icon overlay */}
-                    <motion.div 
+                    <motion.div
                       className="absolute bottom-4 left-4 w-12 h-12 rounded-lg flex items-center justify-center backdrop-blur-sm"
-                      style={{ 
+                      style={{
                         background: "rgba(255,255,255,0.9)",
                         color: "var(--theme-icon-color, #1a1a1a)",
                       }}
                       whileHover={{ scale: 1.1, rotate: 5 }}
-                      // #region agent log
-                      onHoverStart={() => fetch('http://127.0.0.1:7242/ingest/17b1b96c-62ed-4008-bccc-39725b733670',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ServicesSection.tsx:119',message:'Icon hover started',data:{event:'iconHoverStart',serviceId:service.id},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'E'})}).catch(()=>{})}
-                      // #endregion
                     >
                       {serviceIcons[service.id]}
                     </motion.div>
