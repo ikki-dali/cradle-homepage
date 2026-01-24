@@ -6,7 +6,7 @@ const legalInfo = [
   { label: "販売者名", value: "クレイドル株式会社" },
   { label: "代表責任者", value: "竹越茜" },
   { label: "住所", value: "東京都足立区佐野2-17-6-101" },
-  { label: "電話番号", value: "03-5697-8686" },
+  { label: "電話番号", value: "080-9986-2741" },
   { label: "メールアドレス", value: "info@crdl.co.jp" },
   { label: "販売URL", value: "https://crdl.co.jp", isLink: true },
   { label: "支払方法", value: "銀行振込またはクレジットカード" },

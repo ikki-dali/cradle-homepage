@@ -322,7 +322,7 @@ export default function ContactPage() {
                 className="text-2xl sm:text-3xl font-medium mb-4 transition-colors duration-500"
                 style={{ color: "var(--theme-primary, #1a1a1a)" }}
               >
-                03-5697-8686
+                080-9986-2741
               </p>
               <p className="text-sm text-muted-foreground">
                 受付時間: 平日 9:00〜18:00

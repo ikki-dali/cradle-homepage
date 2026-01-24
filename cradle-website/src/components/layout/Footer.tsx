@@ -20,7 +20,7 @@ const legalItems = [
 const companyInfo = {
   name: "クレイドル株式会社",
   address: "東京都足立区佐野2-17-6-101",
-  tel: "03-5697-8686",
+  tel: "080-9986-2741",
 };
 
 export function Footer() {

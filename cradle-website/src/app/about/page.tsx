@@ -8,7 +8,7 @@ const companyInfo = [
   { label: "所在地", value: "東京都足立区佐野2-17-6-101" },
   { label: "設立", value: "2017年" },
   { label: "代表者", value: "竹越茜" },
-  { label: "電話番号", value: "03-5697-8686" },
+  { label: "電話番号", value: "080-9986-2741" },
   {
     label: "事業内容",
     value: "AI・DX支援、法人リスキリング支援、受託開発、ホームページ制作",
