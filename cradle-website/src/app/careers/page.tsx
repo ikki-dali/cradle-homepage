@@ -66,16 +66,16 @@ export default function CareersPage() {
                 <br className="hidden sm:inline" />
                 下記よりお気軽にお問い合わせください。
               </p>
-              <Button 
-                asChild 
+              <Button
+                asChild
                 size="lg"
                 className="transition-colors duration-500"
-                style={{ 
+                style={{
                   background: "var(--theme-primary, #1a1a1a)",
                   color: "var(--theme-cta-text, #ffffff)"
                 }}
               >
-                <Link href="/contact">採用に関するお問い合わせ</Link>
+                <Link href="/careers/apply">採用エントリーフォーム</Link>
               </Button>
             </div>
           </FadeInSection>

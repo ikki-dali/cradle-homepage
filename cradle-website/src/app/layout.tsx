@@ -48,7 +48,7 @@ export const metadata: Metadata = {
       "Cradleは、「何から始めればいいかわからない」という企業に寄り添い、AI導入の構想から社内定着まで徹底的に伴走いたします。",
     type: "website",
     locale: "ja_JP",
-    siteName: "Cradle",
+    siteName: "クレイドル株式会社",
     url: "https://crdl.co.jp",
   },
   twitter: {
@@ -67,13 +67,19 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    // Google Search Consoleの認証コードがあれば追加
-    // google: "your-google-verification-code",
-  },
+  // Google Search Console: DNS経由で所有権確認済み（2025年1月）
 };
 
-// 構造化データ（JSON-LD）
+// 構造化データ（JSON-LD）- WebSite（Googleの検索結果でサイト名を表示するため）
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "クレイドル株式会社",
+  alternateName: "Cradle",
+  url: "https://crdl.co.jp",
+};
+
+// 構造化データ（JSON-LD）- Organization
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -93,7 +99,7 @@ const jsonLd = {
   },
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+81-80-9986-2741",
+    telephone: "+81-70-2368-0098",
     contactType: "customer service",
     availableLanguage: "Japanese",
   },
@@ -121,6 +127,10 @@ export default function RootLayout({
   return (
     <html lang="ja" suppressHydrationWarning>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

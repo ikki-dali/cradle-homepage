@@ -6,34 +6,38 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { services } from "@/lib/services";
 
 interface FormData {
-  company: string;
   name: string;
   email: string;
   phone: string;
-  service: string;
-  message: string;
+  applicationType: string;
+  desiredPosition: string;
+  selfIntroduction: string;
 }
 
 interface FormErrors {
-  company?: string;
   name?: string;
   email?: string;
-  phone?: string;
-  service?: string;
-  message?: string;
+  applicationType?: string;
 }
 
-export default function ContactPage() {
+const applicationTypes = [
+  { id: "new-graduate", label: "新卒採用" },
+  { id: "mid-career", label: "中途採用" },
+  { id: "intern", label: "インターン" },
+  { id: "part-time", label: "アルバイト" },
+  { id: "other", label: "その他" },
+];
+
+export default function CareersApplyPage() {
   const [formData, setFormData] = useState<FormData>({
-    company: "",
     name: "",
     email: "",
     phone: "",
-    service: "",
-    message: "",
+    applicationType: "",
+    desiredPosition: "",
+    selfIntroduction: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -42,9 +46,6 @@ export default function ContactPage() {
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
 
-    if (!formData.company.trim()) {
-      newErrors.company = "会社名を入力してください";
-    }
     if (!formData.name.trim()) {
       newErrors.name = "お名前を入力してください";
     }
@@ -53,8 +54,8 @@ export default function ContactPage() {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "有効なメールアドレスを入力してください";
     }
-    if (!formData.phone.trim()) {
-      newErrors.phone = "電話番号を入力してください";
+    if (!formData.applicationType) {
+      newErrors.applicationType = "応募区分を選択してください";
     }
 
     setErrors(newErrors);
@@ -79,7 +80,7 @@ export default function ContactPage() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ ...formData, formType: "contact" }),
+          body: JSON.stringify({ ...formData, formType: "career" }),
         }
       );
 
@@ -98,7 +99,6 @@ export default function ContactPage() {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
     if (errors[name as keyof FormErrors]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
@@ -126,14 +126,14 @@ export default function ContactPage() {
                   />
                 </svg>
               </div>
-              <h1 
+              <h1
                 className="text-2xl sm:text-3xl font-medium mb-4 transition-colors duration-500"
                 style={{ color: "var(--theme-primary, #1a1a1a)" }}
               >
-                お問い合わせを受け付けました
+                ご応募を受け付けました
               </h1>
               <p className="text-muted-foreground leading-relaxed">
-                お問い合わせいただきありがとうございます。
+                ご応募いただきありがとうございます。
                 <br />
                 内容を確認の上、担当者よりご連絡させていただきます。
                 <br />
@@ -149,23 +149,23 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section 
+      <section
         className="py-20 md:py-32 transition-colors duration-500"
         style={{ background: "var(--theme-section-alt-bg, #f5f5f5)" }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInSection animateOnMount delay={0}>
             <div className="max-w-3xl">
-              <h1 
+              <h1
                 className="text-3xl sm:text-4xl md:text-5xl font-medium mb-6 transition-colors duration-500"
                 style={{ color: "var(--theme-primary, #1a1a1a)" }}
               >
-                お問い合わせ
+                採用エントリー
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                サービスに関するご質問、ご相談など、
+                Cradleで一緒に働きませんか？
                 <br className="hidden sm:inline" />
-                お気軽にお問い合わせください。
+                新卒・中途・インターンなど、どなたでもご応募いただけます。
               </p>
             </div>
           </FadeInSection>
@@ -178,26 +178,6 @@ export default function ContactPage() {
           <FadeInSection animateOnMount delay={0.3}>
             <div className="max-w-2xl mx-auto">
               <form onSubmit={handleSubmit} className="space-y-8">
-                {/* Company */}
-                <div className="space-y-2">
-                  <Label htmlFor="company">
-                    会社名
-                    <span className="text-destructive ml-1">*</span>
-                  </Label>
-                  <Input
-                    id="company"
-                    name="company"
-                    type="text"
-                    value={formData.company}
-                    onChange={handleChange}
-                    placeholder="株式会社〇〇"
-                    className={errors.company ? "border-destructive" : ""}
-                  />
-                  {errors.company && (
-                    <p className="text-sm text-destructive">{errors.company}</p>
-                  )}
-                </div>
-
                 {/* Name */}
                 <div className="space-y-2">
                   <Label htmlFor="name">
@@ -230,7 +210,7 @@ export default function ContactPage() {
                     type="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="example@company.com"
+                    placeholder="example@email.com"
                     className={errors.email ? "border-destructive" : ""}
                   />
                   {errors.email && (
@@ -242,7 +222,7 @@ export default function ContactPage() {
                 <div className="space-y-2">
                   <Label htmlFor="phone">
                     電話番号
-                    <span className="text-destructive ml-1">*</span>
+                    <span className="text-muted-foreground text-xs ml-2">任意</span>
                   </Label>
                   <Input
                     id="phone"
@@ -250,55 +230,67 @@ export default function ContactPage() {
                     type="tel"
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="03-0000-0000"
-                    className={errors.phone ? "border-destructive" : ""}
+                    placeholder="090-0000-0000"
                   />
-                  {errors.phone && (
-                    <p className="text-sm text-destructive">{errors.phone}</p>
+                </div>
+
+                {/* Application Type */}
+                <div className="space-y-2">
+                  <Label htmlFor="applicationType">
+                    応募区分
+                    <span className="text-destructive ml-1">*</span>
+                  </Label>
+                  <select
+                    id="applicationType"
+                    name="applicationType"
+                    value={formData.applicationType}
+                    onChange={handleChange}
+                    className={`flex h-10 w-full rounded-md border bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${
+                      errors.applicationType ? "border-destructive" : "border-input"
+                    }`}
+                    style={{ color: formData.applicationType ? "inherit" : "#9ca3af" }}
+                  >
+                    <option value="">選択してください</option>
+                    {applicationTypes.map((type) => (
+                      <option key={type.id} value={type.id}>
+                        {type.label}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.applicationType && (
+                    <p className="text-sm text-destructive">{errors.applicationType}</p>
                   )}
                 </div>
 
-                {/* Service Selection */}
+                {/* Desired Position */}
                 <div className="space-y-2">
-                  <Label htmlFor="service">
-                    ご興味のあるサービス
-                    <span className="text-muted-foreground text-xs ml-2">
-                      任意
-                    </span>
+                  <Label htmlFor="desiredPosition">
+                    希望職種
+                    <span className="text-muted-foreground text-xs ml-2">任意</span>
                   </Label>
-                  <select
-                    id="service"
-                    name="service"
-                    value={formData.service}
+                  <Input
+                    id="desiredPosition"
+                    name="desiredPosition"
+                    type="text"
+                    value={formData.desiredPosition}
                     onChange={handleChange}
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    style={{ color: formData.service ? "inherit" : "#9ca3af" }}
-                  >
-                    <option value="">選択してください</option>
-                    {services.map((service) => (
-                      <option key={service.id} value={service.id}>
-                        {service.title}
-                      </option>
-                    ))}
-                    <option value="other">その他・未定</option>
-                  </select>
+                    placeholder="エンジニア、コンサルタント など"
+                  />
                 </div>
 
-                {/* Message */}
+                {/* Self Introduction */}
                 <div className="space-y-2">
-                  <Label htmlFor="message">
-                    お問い合わせ内容
-                    <span className="text-muted-foreground text-xs ml-2">
-                      任意
-                    </span>
+                  <Label htmlFor="selfIntroduction">
+                    自己PR・志望動機
+                    <span className="text-muted-foreground text-xs ml-2">任意</span>
                   </Label>
                   <Textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
+                    id="selfIntroduction"
+                    name="selfIntroduction"
+                    value={formData.selfIntroduction}
                     onChange={handleChange}
-                    placeholder="ご質問やご相談内容があればご記入ください"
-                    rows={6}
+                    placeholder="あなたの経験やスキル、Cradleで働きたい理由などをご自由にお書きください"
+                    rows={8}
                   />
                 </div>
 
@@ -308,13 +300,13 @@ export default function ContactPage() {
                     type="submit"
                     size="lg"
                     className="w-full sm:w-auto px-12 transition-colors duration-500"
-                    style={{ 
+                    style={{
                       background: "var(--theme-primary, #1a1a1a)",
                       color: "var(--theme-cta-text, #ffffff)"
                     }}
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? "送信中..." : "送信する"}
+                    {isSubmitting ? "送信中..." : "応募する"}
                   </Button>
                 </div>
               </form>
@@ -323,8 +315,8 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Contact Info */}
-      <section 
+      {/* Note */}
+      <section
         className="py-20 md:py-32 transition-colors duration-500"
         style={{ background: "var(--theme-section-alt-bg, #f5f5f5)" }}
       >
@@ -332,9 +324,12 @@ export default function ContactPage() {
           <FadeInSection>
             <div className="max-w-2xl mx-auto text-center">
               <h2 className="text-xl font-medium mb-6">
-                お電話でのお問い合わせ
+                ご不明な点がございましたら
               </h2>
-              <p 
+              <p className="text-muted-foreground mb-4 leading-relaxed">
+                採用に関するご質問は、お気軽にお問い合わせください。
+              </p>
+              <p
                 className="text-2xl sm:text-3xl font-medium mb-4 transition-colors duration-500"
                 style={{ color: "var(--theme-primary, #1a1a1a)" }}
               >
