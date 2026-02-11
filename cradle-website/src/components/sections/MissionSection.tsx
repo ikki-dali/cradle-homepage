@@ -14,7 +14,7 @@ export function MissionSection() {
       <div className="absolute inset-0 pointer-events-none overflow-hidden hidden md:block">
         <motion.div
           className="blob-animated absolute top-0 right-0 w-[600px] h-[600px] rounded-full opacity-10 blur-3xl"
-          style={{ background: "var(--theme-primary, #1a1a1a)" }}
+          style={{ background: "var(--theme-primary, #1a1a1a)", willChange: "transform", transform: "translateZ(0)" }}
           animate={{
             x: [0, -30, 0],
             y: [0, 30, 0],
@@ -23,7 +23,7 @@ export function MissionSection() {
         />
         <motion.div
           className="blob-animated absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-10 blur-3xl"
-          style={{ background: "var(--theme-accent, #666666)" }}
+          style={{ background: "var(--theme-accent, #666666)", willChange: "transform", transform: "translateZ(0)" }}
           animate={{
             x: [0, 20, 0],
             y: [0, -20, 0],

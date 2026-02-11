@@ -121,13 +121,11 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
     <motion.div
       animate={isDefaultTransition ? {
         opacity: 0,
-        filter: "blur(8px)",
       } : {
         opacity: 1,
-        filter: "blur(0px)",
       }}
       transition={{
-        duration: 0.5,
+        duration: 0.4,
         ease: "easeInOut",
       }}
     >

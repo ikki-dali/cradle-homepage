@@ -97,6 +97,14 @@ html {
   scroll-behavior: smooth;
 }
 
+/* GPU acceleration for animated/blurred elements (Safari optimization) */
+.blob-animated {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
 /* Mobile performance optimizations */
 @media (max-width: 768px) {
   /* Reduce blur intensity on mobile for better performance */
@@ -106,9 +114,10 @@ html {
 
   /* GPU acceleration for animated elements */
   [class*="motion"], [class*="animate"] {
+    -webkit-transform: translateZ(0);
     transform: translateZ(0);
-    backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 }
 

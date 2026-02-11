@@ -21,9 +21,10 @@ export function Header() {
   // スプラッシュ表示中はCSSで非表示（条件付きレンダリングではなくCSSで制御）
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-border/50 transition-opacity duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border/50 transition-opacity duration-300 ${
         isSplashVisible ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
+      style={{ WebkitBackdropFilter: "blur(4px)" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">

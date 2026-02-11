@@ -14,21 +14,19 @@ export function CTASection() {
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           className="hidden md:block blob-animated absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-10 blur-3xl"
-          style={{ background: "var(--theme-cta-text, #ffffff)" }}
+          style={{ background: "var(--theme-cta-text, #ffffff)", willChange: "transform", transform: "translateZ(0)" }}
           animate={{
             x: [0, 50, 0],
             y: [0, -30, 0],
-            scale: [1, 1.2, 1],
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="hidden md:block blob-animated absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-10 blur-3xl"
-          style={{ background: "var(--theme-cta-text, #ffffff)" }}
+          style={{ background: "var(--theme-cta-text, #ffffff)", willChange: "transform", transform: "translateZ(0)" }}
           animate={{
             x: [0, -40, 0],
             y: [0, 40, 0],
-            scale: [1, 1.15, 1],
           }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />

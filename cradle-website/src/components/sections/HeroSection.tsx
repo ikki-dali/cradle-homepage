@@ -23,11 +23,10 @@ export function HeroSection() {
         {/* Large blob - top right */}
         <motion.div
           className="blob-animated absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full opacity-25 blur-[100px]"
-          style={{ background: "var(--theme-primary, #1a1a1a)" }}
+          style={{ background: "var(--theme-primary, #1a1a1a)", willChange: "transform", transform: "translateZ(0)" }}
           animate={{
             x: [0, 80, -40, 60, 0],
             y: [0, -60, 40, -30, 0],
-            scale: [1, 1.2, 0.9, 1.1, 1],
           }}
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -35,11 +34,10 @@ export function HeroSection() {
         {/* Large blob - bottom left */}
         <motion.div
           className="blob-animated absolute -bottom-48 -left-48 w-[700px] h-[700px] rounded-full opacity-20 blur-[120px]"
-          style={{ background: "var(--theme-accent, #666666)" }}
+          style={{ background: "var(--theme-accent, #666666)", willChange: "transform", transform: "translateZ(0)" }}
           animate={{
             x: [0, -60, 80, -40, 0],
             y: [0, 80, -40, 60, 0],
-            scale: [1, 1.15, 1.05, 1.2, 1],
           }}
           transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
@@ -47,11 +45,10 @@ export function HeroSection() {
         {/* Medium blob - center left */}
         <motion.div
           className="blob-animated absolute top-1/4 -left-20 w-[400px] h-[400px] rounded-full opacity-15 blur-[80px]"
-          style={{ background: "var(--theme-primary, #1a1a1a)" }}
+          style={{ background: "var(--theme-primary, #1a1a1a)", willChange: "transform", transform: "translateZ(0)" }}
           animate={{
             x: [0, 100, 50, 120, 0],
             y: [0, -80, 60, -40, 0],
-            scale: [1, 0.8, 1.1, 0.9, 1],
           }}
           transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
@@ -59,11 +56,10 @@ export function HeroSection() {
         {/* Medium blob - center right */}
         <motion.div
           className="blob-animated absolute top-1/3 -right-10 w-[350px] h-[350px] rounded-full opacity-20 blur-[90px]"
-          style={{ background: "var(--theme-accent-light, #999999)" }}
+          style={{ background: "var(--theme-accent-light, #999999)", willChange: "transform", transform: "translateZ(0)" }}
           animate={{
             x: [0, -80, 40, -60, 0],
             y: [0, 60, -80, 40, 0],
-            scale: [1, 1.2, 0.85, 1.1, 1],
           }}
           transition={{ duration: 22, repeat: Infinity, ease: "easeInOut", delay: 3 }}
         />
@@ -71,11 +67,10 @@ export function HeroSection() {
         {/* Small blob - top center */}
         <motion.div
           className="blob-animated absolute top-20 left-1/3 w-[300px] h-[300px] rounded-full opacity-10 blur-[70px]"
-          style={{ background: "var(--theme-primary, #1a1a1a)" }}
+          style={{ background: "var(--theme-primary, #1a1a1a)", willChange: "transform", transform: "translateZ(0)" }}
           animate={{
             x: [0, 60, -40, 80, 0],
             y: [0, 40, -60, 30, 0],
-            scale: [1, 1.3, 0.9, 1.15, 1],
           }}
           transition={{ duration: 16, repeat: Infinity, ease: "easeInOut", delay: 4 }}
         />
@@ -83,11 +78,10 @@ export function HeroSection() {
         {/* Small blob - bottom center */}
         <motion.div
           className="blob-animated absolute bottom-1/4 right-1/3 w-[250px] h-[250px] rounded-full opacity-15 blur-[60px]"
-          style={{ background: "var(--theme-accent, #666666)" }}
+          style={{ background: "var(--theme-accent, #666666)", willChange: "transform", transform: "translateZ(0)" }}
           animate={{
             x: [0, -50, 70, -30, 0],
             y: [0, -70, 50, -40, 0],
-            scale: [1, 0.9, 1.2, 1.05, 1],
           }}
           transition={{ duration: 19, repeat: Infinity, ease: "easeInOut", delay: 5 }}
         />
