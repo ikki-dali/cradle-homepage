@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+export const runtime = "edge";
+
 const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL || "";
 const LINE_NOTIFY_TOKEN = process.env.LINE_NOTIFY_TOKEN || "";
 
