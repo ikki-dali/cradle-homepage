@@ -9,7 +9,7 @@ import { TransitionLink } from "@/components/ui/TransitionLink";
 const navItems = [
   { href: "/services", label: "サービス" },
   { href: "/about", label: "会社概要" },
-  { href: "/works", label: "実績・事例" },
+  // { href: "/works", label: "実績・事例" }, // 一旦非公開
   { href: "/news", label: "お知らせ" },
   { href: "/careers", label: "採用情報" },
 ];
